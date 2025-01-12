@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Sql\RetrieveCustomers.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Sql\RetrieveCustomers.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.35" />
+    <PackageReference Include="Dapper.Contrib" Version="2.0.78" />
+    <PackageReference Include="DataAbstractions.Dapper" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+    <PackageReference Include="System.IO.Abstractions" Version="21.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Api.Template.Domain\Api.Template.Domain.csproj" />
+    <ProjectReference Include="..\Api.Template.Shared\Api.Template.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

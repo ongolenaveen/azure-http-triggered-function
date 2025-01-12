@@ -1,0 +1,42 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:26057",
+      "sslPort": 44337
+    }
+  },
+    "profiles": {
+        "Console": {
+            "commandName": "Project",
+            "dotnetRunMessages": true,
+            "launchBrowser": true,
+            "launchUrl": "swagger",
+            "applicationUrl": "https://localhost:7194;http://localhost:5122",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "AzureAdInstance": "https://login.microsoftonline.com/",
+                "AzureAdClientId": "7417d4b9-21a4-405e-a8d1-ac3e2710d08a",
+                "AzureAdTenantId": "139e141e-530c-47e1-bb88-be71c140da51",
+                "AzureAdFunctionAppClientId": "cff4d60c-f2d2-4e3c-967b-53733a07af8b",
+                "DatabaseConnectionString": ""
+
+            }
+        },
+        "IIS Express": {
+            "commandName": "IISExpress",
+            "launchBrowser": true,
+            "launchUrl": "swagger",
+            "environmentVariables": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "AzureAdInstance": "https://login.microsoftonline.com/",
+                "AzureAdClientId": "7417d4b9-21a4-405e-a8d1-ac3e2710d08a",
+                "AzureAdTenantId": "139e141e-530c-47e1-bb88-be71c140da51",
+                "AzureAdFunctionAppClientId": "cff4d60c-f2d2-4e3c-967b-53733a07af8b",
+                "DatabaseConnectionString": ""
+            }
+        }
+    }
+}

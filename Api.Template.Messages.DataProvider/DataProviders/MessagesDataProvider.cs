@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Api.Template.Domain.DataModels;
+﻿using Api.Template.Domain.DataModels;
 using Api.Template.Domain.Interfaces;
 using Api.Template.Messages.DataProvider.Models;
 using Api.Template.Shared.Interfaces;
@@ -64,10 +63,15 @@ namespace Api.Template.Messages.DataProvider.DataProviders
             var sender = _serviceBusClient.CreateSender(_environmentConfig.ServiceBusTopic);
 
             var messageBody = JsonConvert.SerializeObject(message);
-            var messageBodyBytes = new ServiceBusMessage(Encoding.UTF8.GetBytes(messageBody));
+            var serviceBusMessage = new ServiceBusMessage(messageBody)
+            {
+                CorrelationId = Guid.NewGuid().ToString(),
+                Subject = "test"
+            };
+
             try
             {
-                await sender.SendMessageAsync(messageBodyBytes);
+                await sender.SendMessageAsync(serviceBusMessage);
             }
             finally
             {

@@ -1,0 +1,53 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  - group: template-variable-group
+  - name: buildConfiguration
+    value: 'Release'
+  - name: artifactName
+    value: 'TemplateApp'
+
+stages:
+- stage: CI
+  displayName: Continuous Integration
+
+  jobs:
+  - job: build_and_package_app
+    displayName: Build and Package App
+
+    steps:
+    - script: dotnet restore
+      displayName: 'dotnet restore $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet build $(buildConfiguration)'
+      inputs:
+        command: 'build'
+        projects: '**/*.csproj'
+        arguments: '--configuration $(buildConfiguration)'
+  
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet test $(buildConfiguration)'
+      inputs:
+        command: test
+        projects: '**/*Tests/*.csproj'
+        arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'dotnet publish $(buildConfiguration)'
+      inputs:
+        command: publish
+        publishWebProjects: True
+        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: True 
+    
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish built libraries into azure artifacts.'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: '$(artifactName)'
+        publishLocation: 'Container'
